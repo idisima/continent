@@ -18,7 +18,7 @@ let div2 = document.getElementById('div2')
 // The empty Array
 
 let data =[]
-let arr =[]
+let arr;
 
 function Harmony (continet, country, state, height, complexion, wealthstatus){
     this.continet = continet;
@@ -120,8 +120,6 @@ let getCountryContinent = ()=>{
             if(value === sortbyinputValue){
                 
 
-                
-
                 let paragraph = document.createElement('p');
                 paragraph.innerHTML = ` continent:${fetchValue.continet}, country:${fetchValue.country}, state:${fetchValue.state},
                 height:${fetchValue.height}, complexion:${fetchValue.complexion}, wealthstaus${fetchValue.wealthstatus}`;
@@ -153,43 +151,38 @@ let getCountryContinent = ()=>{
 
 dropdown.addEventListener('click',getAllMembers)
 
-let cont = ()=>{
-    console.log('hello')
-}
 
 sortbyinput.addEventListener('change', getCountryContinent)
 
 
 
-let paragraph ;
+
 let getwealthstatus = ()=>{
-    div.innerHTML = '';
+   let wealthselect =  document.getElementById('wealthValue');
+   let wealthValueExact = wealthselect.value;
+   console.log(wealthValueExact)
+   console.log(arr)
+   if(arr){
+    div2.innerHTML = " "
+    let count = 0
+        arr.filter((val)=>{
+        let wealth =  val.wealthstatus
+            count++;
+            console.log(count)
+        if(wealthValueExact === wealth){
+            let paragraph = document.createElement('p')
+        paragraph.innerHTML = `Wealth Status:${wealth}`
+        console.log(paragraph)
+        div2.append(paragraph)
+            console.log(`it is ${wealth}`)
+        }
+
+        })
+        
 
     
-    for (let i=0; i<arr.length; i++){
-    
-    let wealthValueExact = wealthvalue.value
-            if(arr){
-                arr.filter((val)=>{
-                    if(val.wealthstatus === wealthValueExact){
-                        // console.log(val.wealthstatus)
-                        // console.log(wealthValueExact)
-                        // console.log(val)
-                        
-                        paragraph = document.createElement('p')
-                        paragraph.innerHTML = JSON.stringify(val) 
-                        paragraph.innerHTML = `wealthStatus:${arr[i].wealthstatus},`;
-                        div2.append(paragraph)   
-                        console.log(paragraph)             
-                       
-                    };
-                    
-                    
-                })
-                // console.log(arr)
-              
-            }
-}}
+   }
+}
 
 wealthvalue.addEventListener('change',getwealthstatus)
 
